@@ -39,11 +39,11 @@ export class AuthService {
     
   }
 
-  registerUser(name:string, surname:string,email:string, password:string, birthday:Date): Promise<void>{
+  registerUser(name:string, surname:string,email:string, password:string, birthday:Date, gender: string): Promise<void>{
     return new Promise(async (resolve,reject) => {
       try {
         const id = this.afs.createId();
-        const data = {id, name, surname, email, password, birthday};
+        const data = {id, name, surname, email, password, birthday, gender};
         const result = await this.usersCollection.doc(id).set(data);
         resolve(result);
       } catch (error){

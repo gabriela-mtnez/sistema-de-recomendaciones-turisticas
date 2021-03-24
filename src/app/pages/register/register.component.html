@@ -129,6 +129,16 @@
                 />
               </div>
             </div>
+            <form [formGroup]="radioGroupForm">
+              <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" formControlName="gender">
+                <label ngbButtonLabel class="btn-primary">
+                  <input ngbButton type="radio" value="Male"> Male
+                </label>
+                <label ngbButtonLabel class="btn-primary">
+                  <input ngbButton type="radio" value="Female"> Female
+                </label>
+              </div>
+            </form>
             <div class="text-muted font-italic">
               <small
                 >password strength:
