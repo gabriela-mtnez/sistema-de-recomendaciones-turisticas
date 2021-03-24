@@ -10,7 +10,14 @@
     </div>
   </div>
   <div class="separator separator-bottom separator-skew zindex-100">
-    <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      x="0"
+      y="0"
+      viewBox="0 0 2560 100"
+      preserveAspectRatio="none"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
     </svg>
   </div>
@@ -38,44 +45,118 @@
           <!-- <div class="text-center text-muted mb-4">
             <small>Or sign up with credentials</small>
           </div> -->
-          <form role="form" [formGroup]="registerForm" (ngSubmit)="onRegister()">
+          <form
+            role="form"
+            [formGroup]="registerForm"
+            (ngSubmit)="onRegister()"
+          >
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                  <span class="input-group-text"
+                    ><i class="ni ni-circle-08"></i
+                  ></span>
                 </div>
-                <input class="form-control" placeholder="Name" type="text" formControlName="name">
+                <input
+                  class="form-control"
+                  placeholder="Name"
+                  type="text"
+                  formControlName="name"
+                />
               </div>
             </div>
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                  <span class="input-group-text"
+                    ><i class="ni ni-circle-08"></i
+                  ></span>
                 </div>
-                <input class="form-control" placeholder="Email" type="email" formControlName="email">
+                <input
+                  class="form-control"
+                  placeholder="Surname"
+                  type="text"
+                  formControlName="surname"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-email-83"></i
+                  ></span>
+                </div>
+                <input
+                  class="form-control"
+                  placeholder="Email"
+                  type="email"
+                  formControlName="email"
+                />
               </div>
             </div>
             <div class="form-group">
               <div class="input-group input-group-alternative">
                 <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                  <span class="input-group-text"
+                    ><i class="ni ni-lock-circle-open"></i
+                  ></span>
                 </div>
-                <input class="form-control" placeholder="Password" type="password" formControlName="password">
+                <input
+                  class="form-control"
+                  placeholder="Password"
+                  type="password"
+                  formControlName="password"
+                />
               </div>
             </div>
-            <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-calendar-grid-58"></i
+                  ></span>
+                </div>
+                <input
+                  class="form-control datepicker"
+                  placeholder="Select date"
+                  type="text"
+                  formControlName="birthday"
+                  [(ngModel)]="model"
+                  ngbDatepicker
+                  #d="ngbDatepicker"
+                  (click)="d.toggle()"
+                />
+              </div>
+            </div>
+            <div class="text-muted font-italic">
+              <small
+                >password strength:
+                <span class="text-success font-weight-700">strong</span></small
+              >
+            </div>
             <div class="row my-4">
               <div class="col-12">
-                <div class="custom-control custom-control-alternative custom-checkbox">
-                  <input class="custom-control-input" id="customCheckRegister" type="checkbox">
+                <div
+                  class="custom-control custom-control-alternative custom-checkbox"
+                >
+                  <input
+                    class="custom-control-input"
+                    id="customCheckRegister"
+                    type="checkbox"
+                  />
                   <label class="custom-control-label" for="customCheckRegister">
-                    <span class="text-muted">I agree with the <a href="#!">Privacy Policy</a></span>
+                    <span class="text-muted"
+                      >I agree with the <a href="#!">Privacy Policy</a></span
+                    >
                   </label>
                 </div>
               </div>
             </div>
             <div class="text-center">
-              <button type="submit" class="btn btn-primary mt-4">Crear cuenta</button>
+              <button type="submit" class="btn btn-primary mt-4">
+                Crear cuenta
+              </button>
             </div>
           </form>
         </div>
