@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "sitemaderecomendaciones": {
+      "hosting": {
+        "argon-dashboard-angular": [
+          "sitemaderecomendaciones"
+        ]
+      }
+    }
+  }
+}
