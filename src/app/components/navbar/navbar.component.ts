@@ -22,20 +22,11 @@ export class NavbarComponent implements OnInit {
 
   async ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
-    console.log("Navbar");
     const user = await this.authSvc.getCurrentUser();
     if (user) {
       this.isLogged = true;
     }
   }
-
-  // async ngOnInit(){
-    // console.log("Navbar");
-    // const user = await this.authSvc.getCurrentUser();
-    // if (user) {
-    //   this.isLogged = true;
-    // }
-  // }
 
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());

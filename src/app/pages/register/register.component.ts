@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
       const user = await this.authSvc.register(email, password);
       if(user){
         //redirect (aquí debo redirigir a la encuesta de gustos)
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['survey']);
       }
     } catch (error) {
       console.log(error);

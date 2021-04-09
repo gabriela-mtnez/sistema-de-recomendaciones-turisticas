@@ -12,6 +12,10 @@ const routes: Routes =[
     redirectTo: 'dashboard',
     pathMatch: 'full',
   }, {
+    path: 'survey',
+    redirectTo: 'survey',
+    pathMatch: 'full',
+  }, {
     path: '',
     component: AdminLayoutComponent,
     children: [

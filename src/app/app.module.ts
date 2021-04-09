@@ -2,7 +2,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
@@ -20,6 +20,10 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 
 
+const routes: Routes = [{ 
+  path: 'survey', loadChildren: () => import('./pages/survey/survey.module').then(m => m.SurveyModule) 
+}];
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -32,6 +36,7 @@ import { environment } from 'src/environments/environment';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
+    RouterModule.forRoot(routes),
   ],
   declarations: [
     AppComponent,
