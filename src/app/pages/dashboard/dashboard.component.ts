@@ -10,6 +10,7 @@ import {
   chartExample1,
   chartExample2
 } from "../../variables/charts";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,55 +19,23 @@ import {
   providers: [AuthService, PlacesService],
 })
 export class DashboardComponent implements OnInit {
+  nota:number;
+  recomendations: any;
 
-  constructor(private authSvc:AuthService, private placesSvc:PlacesService) {}
-
-  // public datasets: any;
-  // public data: any;
-  // public salesChart;
-  // public clicked: boolean = true;
-  // public clicked1: boolean = false;
-
-  ngOnInit() {
-
-    // this.datasets = [
-    //   [0, 20, 10, 30, 15, 40, 20, 60, 60],
-    //   [0, 20, 5, 25, 10, 30, 15, 40, 40]
-    // ];
-    // this.data = this.datasets[0];
-
-
-    // var chartOrders = document.getElementById('chart-orders');
-
-    // parseOptions(Chart, chartOptions());
-
-
-    // var ordersChart = new Chart(chartOrders, {
-    //   type: 'bar',
-    //   options: chartExample2.options,
-    //   data: chartExample2.data
-    // });
-
-    // var chartSales = document.getElementById('chart-sales');
-
-    // this.salesChart = new Chart(chartSales, {
-		// 	type: 'line',
-		// 	options: chartExample1.options,
-		// 	data: chartExample1.data
-		// });
+  constructor(private authSvc:AuthService, private placesSvc:PlacesService) {
+    this.nota=5;
+    this.recomendations = {};
   }
 
-
-  // public updateOptions() {
-  //   this.salesChart.data.datasets[0].data = this.data;
-  //   this.salesChart.update();
-  // }
+  ngOnInit() {
+  }
 
   async descubrirLugares(){
     const user = this.authSvc.getUserProfile();
     const places = await this.authSvc.getUserPlaces(user["email"]);
     var selectedPlacesId = places["data"]["selectedPlaces"];
-    var selectedPlacesInfo = []
+    var selectedPlacesInfo = []; //places selected on the survey
+    var placesInfo = [];
     for (let i = 0; i < selectedPlacesId.length; i++){
       let place = await this.placesSvc.getPlacesById(selectedPlacesId[i]["idLugar"]);
       if(place["tipoLugar"] == "Museo" || place["tipoLugar"] == "Sitio arqueológico"){
@@ -75,8 +44,27 @@ export class DashboardComponent implements OnInit {
         selectedPlacesInfo.push({"lugar" : "Restaurantes: [" + place["nombreLugar"] + "]", "rating": selectedPlacesId[i]["rating"]});
       }
     }
-    console.log(selectedPlacesInfo);
-    //De aquí falta llamar al servicio mediante un POST y enviarle por body selectedPlacesInfo
+    this.placesSvc.callRecomendationsAlgorith(selectedPlacesInfo).subscribe(async recomendation => {
+      for (let i = 0; i < recomendation["data"].length; i++){
+        var auxString = recomendation["data"][i]["index"].replace('Museos y sitios arqueológicos: [', '');
+        auxString = auxString.replace(']', '');
+        auxString = auxString.replace('Restaurantes: [', '');
+        recomendation["data"][i]["index"] = auxString;
+        //Search image in DB
+        let placeName = recomendation["data"][i]["index"];
+        placesInfo.push(await this.placesSvc.getPlacesByName(placeName));
+        let placeImageLink = placesInfo[i]["imagenLugar"] != undefined ? placesInfo[i]["imagenLugar"]: "";
+        recomendation["data"][i].imagenLugar = placeImageLink;
+      }
+      this.recomendations = recomendation["data"];
+      console.log(this.recomendations);
+    });
+  }
+
+  async saberMas(placeName){
+    let placeInfo = await this.placesSvc.getPlacesByName(placeName);
+    console.log(placeInfo);
+    //Cambiar de página y mostrar la info del lugar
   }
 
 }
