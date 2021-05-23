@@ -16,6 +16,10 @@ const routes: Routes =[
     redirectTo: 'survey',
     pathMatch: 'full',
   }, {
+    path: 'placeview',
+    redirectTo: 'placeview',
+    pathMatch: 'full',
+  },  {
     path: '',
     component: AdminLayoutComponent,
     children: [

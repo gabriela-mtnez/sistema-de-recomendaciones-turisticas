@@ -1,35 +1,42 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
-      <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8" *ngIf="(recomendations | json) == '{}'">
-        <button type="button" class="btn btn-primary btn-lg btn-block btn-circle" (click)="descubrirLugares()">Descubrir lugares</button>
-      </div>
-      <!-- El *ngIf verifica que no esté vacío recomendations -->
-      <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8" *ngIf="(recomendations | json) != '{}'">
-        <div class="container-fluid">
-          <div class="header-body">
-            <!-- Card stats -->
-            <div class="row">
-              <div class="col-xl-3 col-lg-6" *ngFor="let item of recomendations">
-                  <div class="card card-stats mb-4 mb-xl-0">
-                      <div class="card-body">
-                          <div class="row">
-                              <div class="col">
-                                  <img class="card-img-top" src="{{item.imagenLugar}}" alt="Card image cap">
-                                  <div class="card-body">
-                                      <h5 class="card-title">{{item.index}}</h5>
-                                      <p class="card-text">{{item.values}}</p>
-                                      <button class="btn btn-primary" type="button" (click)="saberMas(item.index)">Saber más</button>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
+
+<div class="container-fluid">
+  <div class="row" *ngIf="(recomendations | json) == '{}'">
+      <div class="col mt--8 d-flex justify-content-center">
+        <button type="button" class="btn btn-primary btn-circle btn-xl" (click)="descubrirLugares()">Descubrir lugares</button>
+      </div>
+  </div>
+  <!-- El *ngIf verifica que no esté vacío recomendations -->
+    <div class="container-fluid mt--8" *ngIf="(recomendations | json) != '{}'">
+      <div class="header-body">
+        <!-- Card stats -->
+        <div class="row">
+          <div class="col-xl-3 col-lg-6 pb-5" *ngFor="let item of recomendations">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <img class="card-img-top" src="{{item.imagenLugar}}" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">{{item.index}}</h5>
+                      <p class="card-text">{{item.values}}</p>
+                      <button class="btn btn-primary" type="button" (click)="saberMas(item.index)">Saber más</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-primary" (click)="redirect()">Ver todos los lugares</button>
+    </div>
+    </div>
+</div>
+

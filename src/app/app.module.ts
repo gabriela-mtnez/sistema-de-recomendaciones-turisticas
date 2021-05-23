@@ -22,6 +22,8 @@ import { environment } from 'src/environments/environment';
 
 const routes: Routes = [{ 
   path: 'survey', loadChildren: () => import('./pages/survey/survey.module').then(m => m.SurveyModule) 
+},{ 
+  path: 'placeview', loadChildren: () => import('./pages/place-view/place-view.module').then(m => m.PlaceViewModule)
 }];
 
 @NgModule({

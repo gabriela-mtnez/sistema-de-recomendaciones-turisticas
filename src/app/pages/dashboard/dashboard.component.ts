@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { PlacesService } from 'src/app/app/services/places.service';
+import { NavigationExtras, Router } from '@angular/router';
 
 // core components
 import {
@@ -21,8 +22,13 @@ import { Observable } from 'rxjs';
 export class DashboardComponent implements OnInit {
   nota:number;
   recomendations: any;
+  navigationExtras: NavigationExtras = {
+    state: {
+      place: null
+    }
+  }
 
-  constructor(private authSvc:AuthService, private placesSvc:PlacesService) {
+  constructor(private authSvc:AuthService, private placesSvc:PlacesService, private router: Router) {
     this.nota=5;
     this.recomendations = {};
   }
@@ -63,8 +69,17 @@ export class DashboardComponent implements OnInit {
 
   async saberMas(placeName){
     let placeInfo = await this.placesSvc.getPlacesByName(placeName);
-    console.log(placeInfo);
     //Cambiar de página y mostrar la info del lugar
+    //enviar info del lugar
+    this.navigationExtras.state.place = placeInfo;
+    //Redirect to dashboard
+    this.router.navigate(['placeview'], this.navigationExtras);
+    console.log(placeInfo);
+  }
+
+  redirect(){
+    //redirect
+    this.router.navigate(['/icons']);
   }
 
 }
