@@ -22,7 +22,7 @@
             <div class="card-body">
               <h5 class="card-title">{{ item.nombreLugar }}</h5>
               <p class="card-text">{{ item.tipoLugar }}</p>
-              <button class="btn btn-primary" type="button">
+              <button class="btn btn-primary" type="button" (click)="saberMas(item.nombreLugar)">
                 Saber más
               </button>
             </div>

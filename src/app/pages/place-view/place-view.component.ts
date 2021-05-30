@@ -12,12 +12,17 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 export class PlaceViewComponent implements OnInit {
   value = null;
 
-  constructor(private router: Router) { 
+  constructor(private router: Router, private authSvc:AuthService) { 
     const navigation = this.router.getCurrentNavigation();
     this.value = navigation?.extras?.state?.place;
   }
 
   ngOnInit(): void {
+  }
+
+  async placeToVisit(idPlace){
+    let place = {"idLugar": idPlace, "rating": 0};
+    await this.authSvc.addVisitedPlace(place);
   }
 
 }

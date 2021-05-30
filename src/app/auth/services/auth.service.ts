@@ -98,6 +98,21 @@ export class AuthService {
     })
   }
 
+  
+  addVisitedPlace(placeToVisit: any){
+    var userId = localStorage.getItem('idUser');
+    return new Promise(async (resolve,reject) => {
+      try {
+        const userRef = await this.usersCollection.doc(userId);
+        //Aquí actualizamos un array dentro de un documento
+        var setWithMerge = userRef.update({"data.selectedPlaces": firebase.firestore.FieldValue.arrayUnion(placeToVisit)});
+        resolve(setWithMerge);
+      } catch (error){
+        reject(error.message);
+      }
+    })
+  }
+
   async getUserPlaces(userEmail: string){
     var db = firebase.firestore();
     var query = {};
@@ -110,5 +125,21 @@ export class AuthService {
     });
     return query;
   }
+
+  async setRatingVisitedPlace(selectedPlaces:any[]){
+    var userId = localStorage.getItem('idUser');
+    await this.usersCollection.doc(userId).collection('data').doc('selectedPlaces').delete();
+    return new Promise(async (resolve,reject) => {
+      try {
+        const data = {selectedPlaces};
+        const userRef = this.usersCollection.doc(userId);
+        var setWithMerge = userRef.set({data}, { merge: true });
+        resolve(setWithMerge);
+      } catch (error){
+        reject(error.message);
+      }
+    })
+  }
+
 
 }
