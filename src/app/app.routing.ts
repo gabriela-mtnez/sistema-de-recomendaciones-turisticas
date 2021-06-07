@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes =[
   {
@@ -48,9 +49,10 @@ const routes: Routes =[
     CommonModule,
     BrowserModule,
     RouterModule.forRoot(routes,{
-    useHash: true,
-    relativeLinkResolution: 'legacy'
-})
+      useHash: true,
+      relativeLinkResolution: 'legacy'
+    }),
+    FormsModule
   ],
   exports: [
   ],

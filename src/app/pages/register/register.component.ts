@@ -12,7 +12,6 @@ import { AuthService } from '../../auth/services/auth.service';
 export class RegisterComponent implements OnInit {
 
   private isEmail = /\S+@\S+\.\S+/;
-
   public radioGroupForm: FormGroup;
 
   registerForm = new FormGroup({

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { SurveyComponent } from './survey.component';
+import { FormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
   declarations: [SurveyComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    FormsModule
   ]
 })
 export class SurveyModule { }
