@@ -18,6 +18,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
+import { LandinngComponent } from './pages/landing/landinng.component';
 
 
 const routes: Routes = [{ 
@@ -43,7 +44,8 @@ const routes: Routes = [{
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    LandinngComponent
   ],
   providers: [AngularFirestore],
   bootstrap: [AppComponent]
