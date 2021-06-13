@@ -39,7 +39,7 @@ const routes: Routes = [{
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes)
   ],
   declarations: [
     AppComponent,

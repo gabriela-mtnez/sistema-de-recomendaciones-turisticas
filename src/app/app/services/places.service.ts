@@ -5,6 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, first, map } from 'rxjs/operators';
 import firebase from 'firebase/app';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Config } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 export class PlacesService {
   places: Observable<any[]>;
   private urlAPI = 'https://us-central1-carritos.cloudfunctions.net/algoritmoDeRecomendaciones';
+  public APIkey = 'AIzaSyDSTS4TzrzallQIpq9dJhnfeYc2DibuXeA';
 
   private placesCollection: AngularFirestoreCollection<any>;
 
@@ -43,9 +45,14 @@ export class PlacesService {
   callRecomendationsAlgorith(selectedPlacesObject: any):Observable<any>{
     const headers = { 'content-type': 'application/json'};
     return this.http.post<any>(this.urlAPI, selectedPlacesObject,{headers:headers});
-   }
+  }
 
-   async getPlacesByName(placeName){
+  getPlacesReviews(place_id):Observable<any>{
+    const placesAPI = 'https://maps.googleapis.com/maps/api/place/details/json?';
+    return this.http.get<Config>(placesAPI + "place_id=" + place_id + "&fields=reviews,rating,user_ratings_total,formatted_phone_number,opening_hours,geometry&key=" + this.APIkey);
+  }
+
+  async getPlacesByName(placeName){
     var db = firebase.firestore();
     var query = {};
     await db.collection("places").where("nombreLugar", "==", placeName).get().then((querySnapshot) => {
