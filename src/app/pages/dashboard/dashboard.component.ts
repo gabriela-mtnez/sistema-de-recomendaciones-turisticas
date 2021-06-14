@@ -74,7 +74,6 @@ export class DashboardComponent implements OnInit {
     this.navigationExtras.state.place = placeInfo;
     //Redirect to dashboard
     this.router.navigate(['placeview'], this.navigationExtras);
-    console.log(placeInfo);
   }
 
   redirect(){

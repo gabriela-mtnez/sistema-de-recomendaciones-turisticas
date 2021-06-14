@@ -21,13 +21,13 @@ export class PlaceViewComponent implements OnInit {
   constructor(private router: Router, private authSvc:AuthService, private placesSvc:PlacesService) { 
     const navigation = this.router.getCurrentNavigation();
     this.value = navigation?.extras?.state?.place;
-    this.comments = {};
+    this.comments = [];
     this.coordinates = {};
   }
 
   async ngOnInit() {
     const DSLScript = document.createElement('script');
-    DSLScript.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDSTS4TzrzallQIpq9dJhnfeYc2DibuXeA'; // replace by your API key
+    DSLScript.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDSTS4TzrzallQIpq9dJhnfeYc2DibuXeA&libraries=places'; // replace by your API key
     DSLScript.type = 'text/javascript';
     document.body.appendChild(DSLScript);
 
