@@ -1,19 +1,19 @@
 <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(assets/img/theme/bellas-artes.jpeg); background-size: cover; background-position: center top;">
-  <!-- Mask -->
-  <span class="mask bg-gradient-danger opacity-8"></span>
-  <!-- Header container -->
-  <div class="container-fluid d-flex align-items-center">
-    <div class="row">
-      <div class="col-lg-7 col-md-10 mt--9">
-        <h1 class="display-2 text-white">Hola {{userInfo.name}}</h1>
-        <p class="text-white mt-0 mb-5">Esta es tu página de perfil, aqui puedes ver los datos que ingresaste en tu registro.</p>
-      </div>
+    <!-- Mask -->
+    <span class="mask bg-gradient-danger opacity-8"></span>
+    <!-- Header container -->
+    <div class="container-fluid d-flex align-items-center">
+        <div class="row">
+            <div class="col-lg-7 col-md-10 mt--9">
+                <h1 class="display-2 text-white">Hola {{userInfo.name}}</h1>
+                <p class="text-white mt-0 mb-5">Esta es tu página de perfil, aqui puedes ver los datos que ingresaste en tu registro.</p>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <div class="container-fluid mt--7">
-  <div class="row">
-    <!-- <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+    <div class="row">
+        <!-- <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
       <div class="card card-profile shadow">
         <div class="row justify-content-center">
           <div class="col-lg-3 order-lg-2">
@@ -69,70 +69,76 @@
         </div>
       </div>
     </div> -->
-    <div class="col-xl-12 order-xl-1 mt--9">
-      <div class="card bg-secondary shadow">
-        <div class="card-header bg-white border-0">
-          <div class="row align-items-center">
-            <div class="col-8">
-              <h3 class="mb-0">Mi cuenta</h3>
-            </div>
-          </div>
-        </div>
-        <div class="card-body">
-          <!-- <form> -->
-            <h6 class="heading-small text-muted mb-4">Información de usuario</h6>
-            <div class="pl-lg-4">
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-username">Nombre</label>
-                    <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Nombre" value="{{userInfo.name}}">
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-email">Apellido</label>
-                    <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="Apellido" value="{{userInfo.surname}}">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-email">Email</label>
-                    <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="Ej: usuario@email.com" value="{{userInfo.email}}">
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-email">Cumpleaños </label>
-                    <input type="text" id="input-birthday" class="form-control form-control-alternative" placeholder = "dd/mm/yyyy" value="{{userInfo.birthday}}" disabled>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label class="form-control-label" for="input-password">Contraseña</label>
-                      <input type="password" id="input-password" class="form-control form-control-alternative" placeholder="Ej: MiContr@seña123" value="{{userInfo.password}}">
+        <div class="col-xl-12 order-xl-1 mt--9">
+            <div class="card bg-secondary shadow">
+                <div class="card-header bg-white border-0">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <h3 class="mb-0">Mi cuenta</h3>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-lg-6">
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col-lg-6">
-                  </div>
-                  <div class="col-lg-6">
-                    <button type="submit" class="btn btn-primary" (click)="onUpdate()">
+                </div>
+                <div class="card-body">
+                    <!-- <form> -->
+                    <form role="form" [formGroup]="saveForm" (ngSubmit)="onSave()">
+                        <h6 class="heading-small text-muted mb-4">Información de usuario</h6>
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-username">Nombre</label>
+                                        <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Nombre" value="{{userInfo.name}}" formControlName="name" [disabled]="state">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-email">Apellido</label>
+                                        <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="Apellido" value="{{userInfo.surname}}" formControlName="surname" [disabled]="state">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-email">Email</label>
+                                        <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="Ej: usuario@email.com" value="{{userInfo.email}}" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-email">Cumpleaños </label>
+                                        <input type="text" id="input-birthday" class="form-control form-control-alternative" placeholder="dd/mm/yyyy" value="{{userInfo.birthday}}" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-password">Contraseña</label>
+                                        <input type="password" id="input-password" class="form-control form-control-alternative" placeholder="Ej: MiContr@seña123" value="{{userInfo.password}}" formControlName="password" [disabled]="state">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                </div>
+                                <div class="col-lg-6">
+                                    <button class="btn btn-primary" (click)="onUpdate()" [disabled]="mostrar_editar">
                       Editar cuenta
                     </button>
-                  </div> 
-              </div>
+                                    <button type="submit" class="btn btn-primary" [disabled]="mostrar_guardar"> 
+                      Guardar cambios
+                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <hr class="my-4" /> Esta línea divide el div-->
+                    </form>
+                    <!-- </form> -->
+                </div>
             </div>
-            <!-- <hr class="my-4" /> Esta línea divide el div--> 
         </div>
-      </div>
     </div>
-  </div>
 </div>

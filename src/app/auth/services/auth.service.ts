@@ -141,5 +141,19 @@ export class AuthService {
     })
   }
 
+  // Editar usuario
+  editUser(name:string, surname:string, password:string){
+    var userId = localStorage.getItem('idUser');
+    return new Promise(async (resolve,reject) => {
+      try {
+        const data = {name,surname, password};
+        const userRef = await this.usersCollection.doc(userId);
+        var setWithMerge = userRef.set({data}, { merge: true });
+        resolve(setWithMerge);
+      } catch (error){
+        reject(error.message);
+      }
+    })
+  }
 
 }

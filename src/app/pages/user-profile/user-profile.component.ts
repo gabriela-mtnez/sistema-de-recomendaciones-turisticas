@@ -14,6 +14,15 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class UserProfileComponent implements OnInit {
   public isLogged = false;
   userInfo: any;
+  state = true;
+  mostrar_guardar = true;
+  mostrar_editar = false;
+
+  saveForm = new FormGroup({
+    name : new FormControl(''),
+    surname : new FormControl(''),
+    password : new FormControl(''),
+  })
 
   constructor(private authSvc:AuthService, private placesSvc:PlacesService, private router: Router, private fb:FormBuilder) {
     this.userInfo = {
@@ -50,5 +59,30 @@ export class UserProfileComponent implements OnInit {
     
   }
 
-  onUpdate(){}
+    onUpdate(){
+    //Des-habilitar botones a editar.
+    this.state = !this.state;
+
+    this.mostrar_guardar = !this.mostrar_guardar;
+    this.mostrar_editar = !this.mostrar_editar;
+
+    //Habilitar btn guardar
+    //this.mostrar_guardar = !this.mostrar_guardar;
+  }
+
+  async onSave(){
+    const {name, surname,  password} = this.saveForm.value;
+  
+    if(this.saveForm.valid ){
+      this.authSvc.editUser(name, surname, password);
+    }
+
+    //Des-habilitar botones a editar.
+    this.state = !this.state;
+    this.mostrar_guardar = !this.mostrar_guardar;
+    this.mostrar_editar = !this.mostrar_editar;
+
+    //Habilitar btn guardar
+    //this.mostrar_guardar = !this.mostrar_guardar;
+  }
 }
