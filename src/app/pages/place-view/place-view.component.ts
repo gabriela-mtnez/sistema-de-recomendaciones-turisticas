@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlacesService } from 'src/app/app/services/places.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
-declare const google: any;
+import {AfterViewInit} from '@angular/core';
+// declare const google: any;
+import {} from 'googlemaps';
 
 @Component({
   selector: 'app-place-view',
@@ -23,55 +25,33 @@ export class PlaceViewComponent implements OnInit {
     this.coordinates = {};
   }
 
-  ngOnInit(){
-    this.placesSvc.getPlacesReviews(this.value["placeID"]).subscribe(async results => {
-      this.comments = results["result"]["reviews"];
-      console.log(results);
-      this.rating = results["result"]["rating"];
-      this.coordinates = results["result"]["geometry"]["location"];
+  async ngOnInit() {
+    const DSLScript = document.createElement('script');
+    DSLScript.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDSTS4TzrzallQIpq9dJhnfeYc2DibuXeA'; // replace by your API key
+    DSLScript.type = 'text/javascript';
+    document.body.appendChild(DSLScript);
+
+
+    const results = await this.placesSvc.getPlacesReviews(this.value["placeID"]).toPromise();
+    this.comments = results["result"]["reviews"];
+    this.rating =  results["result"]["rating"];
+    this.coordinates =  results["result"]["geometry"]["location"];
+    
+    let map: google.maps.Map;
+    let infowindow: google.maps.InfoWindow;
+    const myLatLng = { lat: this.coordinates["lat"], lng: this.coordinates["lng"] };
+
+    infowindow = new google.maps.InfoWindow();
+
+    map = new google.maps.Map(document.getElementById("map-canvas") as HTMLElement, {
+      center: myLatLng,
+      zoom: 15,
     });
 
-    // -------------------------------
-
-    let map = document.getElementById('map-canvas');
-    let lat = map.getAttribute('data-lat');
-    let lng = map.getAttribute('data-lng');
-
-    var myLatlng = new google.maps.LatLng(lat, lng);
-    var mapOptions = {
-        zoom: 12,
-        scrollwheel: false,
-        center: myLatlng,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        styles: [
-          {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},
-          {"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},
-          {"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},
-          {"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},
-          {"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},
-          {"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},
-          {"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},
-          {"featureType":"water","elementType":"all","stylers":[{"color":'#5e72e4'},{"visibility":"on"}]}]
-    }
-
-    map = new google.maps.Map(map, mapOptions);
-
-    var marker = new google.maps.Marker({
-        position: myLatlng,
-        map: map,
-        animation: google.maps.Animation.DROP,
-        title: 'Hello World!'
-    });
-
-    var contentString = '<div class="info-window-content"><h2>Argon Dashboard</h2>' +
-        '<p>A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</p></div>';
-
-    var infowindow = new google.maps.InfoWindow({
-        content: contentString
-    });
-
-    google.maps.event.addListener(marker, 'click', function() {
-        infowindow.open(map, marker);
+    new google.maps.Marker({
+      position: myLatLng,
+      map,
+      title: "VIVA TURISMO",
     });
   }
 
