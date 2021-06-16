@@ -38,7 +38,7 @@
                 </div>
                 <input
                   class="form-control"
-                  placeholder="Name"
+                  placeholder="Nombre"
                   type="text"
                   formControlName="name"
                 />
@@ -53,7 +53,7 @@
                 </div>
                 <input
                   class="form-control"
-                  placeholder="Surname"
+                  placeholder="Apellido"
                   type="text"
                   formControlName="surname"
                 />
@@ -98,7 +98,7 @@
                 </div>
                 <input
                   class="form-control datepicker"
-                  placeholder="Select date"
+                  placeholder="Fecha de nacimiento"
                   type="text" formControlName="birthday" ngbDatepicker [minDate]="{year: 1950, month: 1, day: 1}"
                   #d="ngbDatepicker"
                   (click)="d.toggle()"
@@ -108,10 +108,10 @@
             <form [formGroup]="radioGroupForm">
               <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" formControlName="gender">
                 <label ngbButtonLabel class="btn-primary">
-                  <input ngbButton type="radio" value="Male"> Male
+                  <input ngbButton type="radio" value="Male"> Hombre
                 </label>
                 <label ngbButtonLabel class="btn-primary">
-                  <input ngbButton type="radio" value="Female"> Female
+                  <input ngbButton type="radio" value="Female"> Mujer
                 </label>
               </div>
             </form>
