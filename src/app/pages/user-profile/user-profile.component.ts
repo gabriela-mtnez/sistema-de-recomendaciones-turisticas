@@ -70,12 +70,9 @@ export class UserProfileComponent implements OnInit {
     //this.mostrar_guardar = !this.mostrar_guardar;
   }
 
-  async onSave(){
-    const {name, surname,  password} = this.saveForm.value;
-  
-    if(this.saveForm.valid ){
-      this.authSvc.editUser(name, surname, password);
-    }
+  async onSave(nombre, apellido, contrasenia) {
+    this.authSvc.editUser(nombre, apellido, contrasenia);
+    this.router.navigate(['/user-profile']);
 
     //Des-habilitar botones a editar.
     this.state = !this.state;
